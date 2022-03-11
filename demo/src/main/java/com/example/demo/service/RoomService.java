@@ -28,7 +28,7 @@ public class RoomService {
     }
 
     public List<RoomDto> getAll(){
-        List<Room> roomList = roomRepo.findAll();
+        List<Room> roomList = roomRepo.findAllAndDeletedAtNull();
         List<Room> list = new LinkedList<>();
         if(!roomList.isEmpty()){
             for (Room room : roomList){
@@ -65,8 +65,8 @@ public class RoomService {
     }
 
     //Secondary functions
-    private Room getEntity(Long id) {
-        Optional<Room> optional = roomRepo.findById(id);
+    public Room getEntity(Long id) {
+        Optional<Room> optional = roomRepo.findByIdAndDeletedAtNull(id);
         if(optional.isEmpty()){
             throw new CustomGlobalExceptionHandler("Room not found");
         }

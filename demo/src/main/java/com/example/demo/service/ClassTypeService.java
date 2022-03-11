@@ -27,7 +27,7 @@ public class ClassTypeService {
     }
 
     public List<ClassTypeDto> getAll(){
-        List<ClassType> classTypeList = classTypeRepository.findAll();
+        List<ClassType> classTypeList = classTypeRepository.findAllAndDeletedAtNull();
         List<ClassType> list = new LinkedList<>();
         if(!classTypeList.isEmpty()){
             for (ClassType classType : classTypeList){
@@ -60,8 +60,8 @@ public class ClassTypeService {
     }
 
     //Secondary functions
-    private ClassType getEntity(Long id) {
-        Optional<ClassType> optional = classTypeRepository.findById(id);
+    public ClassType getEntity(Long id) {
+        Optional<ClassType> optional = classTypeRepository.findByIdAndDeletedAtNull(id);
         if(optional.isEmpty()){
             throw new CustomGlobalExceptionHandler("Class Type not found");
         }
