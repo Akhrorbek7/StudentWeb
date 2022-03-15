@@ -56,6 +56,9 @@ public class User {
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
+
+
+    //sdgkjkjgsfkdlgjsdkfg
 }
 
 
